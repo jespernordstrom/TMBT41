@@ -25,6 +25,8 @@ public class GeneralPurpose extends AppCompatActivity {
     Button bivalve2;
     Button bivalve3;
     Button bivalve4;
+    Button bivalve5;
+    Button bivalve6;
     Button valveOpenAll;
     Button valveCloseAll;
     Button home;
@@ -32,6 +34,8 @@ public class GeneralPurpose extends AppCompatActivity {
     Boolean valve2;
     Boolean valve3;
     Boolean valve4;
+    Boolean valve5;
+    Boolean valve6;
     TextView descriptionText;
 
     @Override
@@ -54,6 +58,8 @@ public class GeneralPurpose extends AppCompatActivity {
         bivalve2 = (Button)findViewById(R.id.open2);
         bivalve3 = (Button)findViewById(R.id.open3);
         bivalve4 = (Button)findViewById(R.id.open4);
+        bivalve5 = (Button)findViewById(R.id.open5);
+        bivalve6 = (Button)findViewById(R.id.open6);
         descriptionText = (TextView)findViewById(R.id.textBox);
         valveCloseAll   = (Button)findViewById(R.id.closeAll);
         valveOpenAll    = (Button)findViewById(R.id.openAll);
@@ -84,7 +90,7 @@ public class GeneralPurpose extends AppCompatActivity {
                         valve1 = true;
                     }
                     else{
-                        String sendtext = 'o' + " " + "5";
+                        String sendtext = 'o' + " " + "1";
                         btt.write(sendtext.getBytes());
                         if (responseLength <= 13) {
                             descriptionText.setText(descriptionText.getText() + "\n" + "VALVE 1 CLOSED");
@@ -122,7 +128,7 @@ public class GeneralPurpose extends AppCompatActivity {
                         valve2 = true;
                     }
                     else{
-                        String sendtext = 'o' + " " + "6";
+                        String sendtext = 'o' + " " + "2";
                         btt.write(sendtext.getBytes());
                         if (responseLength <= 13) {
                             descriptionText.setText(descriptionText.getText() + "\n" + "VALVE 2 CLOSED");
@@ -158,7 +164,7 @@ public class GeneralPurpose extends AppCompatActivity {
                         valve3 = true;
                     }
                     else {
-                        String sendtext = 'o' + " " + "7";
+                        String sendtext = 'o' + " " + "3";
                         btt.write(sendtext.getBytes());
                         if (responseLength <= 13) {
                             descriptionText.setText(descriptionText.getText() + "\n" + "VALVE 3 CLOSED");
@@ -193,7 +199,7 @@ public class GeneralPurpose extends AppCompatActivity {
                         valve4 = true;
                     }
                     else {
-                        String sendtext = 'o' + " " + "8";
+                        String sendtext = 'o' + " " + "4";
                         btt.write(sendtext.getBytes());
                         if (responseLength <= 13) {
                             descriptionText.setText(descriptionText.getText() + "\n" + "VALVE 4 CLOSED");
@@ -213,11 +219,75 @@ public class GeneralPurpose extends AppCompatActivity {
             }
         });
 
+        bivalve5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mmSocket.isConnected() && btt != null){
+                    if (!valve5) {
+                        String sendtext = 'o' + " " + "5";
+                        btt.write(sendtext.getBytes());
+                        if (responseLength <= 13) {
+                            descriptionText.setText(descriptionText.getText() + "\n" + "VALVE 5 OPEN");
+                            responseLength++;
+                        } else {
+                            descriptionText.setText("VALVE 5 OPEN");
+                            responseLength = 1;
+                        }
+                        valve5 = true;
+                    }
+                    else {
+                        String sendtext = 'o' + " " + "5";
+                        btt.write(sendtext.getBytes());
+                        if (responseLength <= 13) {
+                            descriptionText.setText(descriptionText.getText() + "\n" + "VALVE 5 CLOSED");
+                            responseLength++;
+                        } else {
+                            descriptionText.setText("VALVE 5 CLOSED");
+                            responseLength = 1;
+                        }
+                        valve5 = false;
+                    }
+                }
+            }
+        });
+
+        bivalve6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mmSocket.isConnected() && btt != null){
+                    if (!valve6) {
+                        String sendtext = 'o' + " " + "6";
+                        btt.write(sendtext.getBytes());
+                        if (responseLength <= 13) {
+                            descriptionText.setText(descriptionText.getText() + "\n" + "VALVE 5 OPEN");
+                            responseLength++;
+                        } else {
+                            descriptionText.setText("VALVE 5 OPEN");
+                            responseLength = 1;
+                        }
+                        valve6 = true;
+                    }
+                    else {
+                        String sendtext = 'o' + " " + "6";
+                        btt.write(sendtext.getBytes());
+                        if (responseLength <= 13) {
+                            descriptionText.setText(descriptionText.getText() + "\n" + "VALVE 5 CLOSED");
+                            responseLength++;
+                        } else {
+                            descriptionText.setText("VALVE 5 CLOSED");
+                            responseLength = 1;
+                        }
+                        valve6 = false;
+                    }
+                }
+            }
+        });
+
         valveOpenAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(mmSocket.isConnected() && btt != null) {
-                    String sendtext = 'o' + " " + "1234";
+                    String sendtext = 'o' + " " + "123456";
                     btt.write(sendtext.getBytes());
                     if (responseLength <= 13) {
                         descriptionText.setText(descriptionText.getText() + "\n" + "ALL VALVES OPEN");
@@ -235,7 +305,7 @@ public class GeneralPurpose extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(mmSocket.isConnected() && btt != null) {
-                    String sendtext = 'o' + " " + "5678";
+                    String sendtext = 'o' + " " + "123456";
                     btt.write(sendtext.getBytes());
                     if (responseLength <= 13) {
                         descriptionText.setText(descriptionText.getText() + "\n" + "ALL VALVES CLOSED");
